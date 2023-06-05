@@ -11,7 +11,7 @@ pipeline
  stages
  
  {
-    stage ('Biuld image')
+    stage ('Build image')
     {
        steps
        { 
