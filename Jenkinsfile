@@ -22,7 +22,7 @@ pipeline
       }
    }
    
-   stage (Deploy the image)
+   stage ('Deploy the image')
    { 
         steps
        { 
