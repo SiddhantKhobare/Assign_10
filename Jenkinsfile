@@ -1,39 +1,37 @@
 pipeline
-{  
-   environment
-   {
-     registry = "siddhantkhobare/demoimage"
-     resgistryCredential = 'dockerid'
-     dockerImage = ''
-   }
- agent any
- 
- stages
- 
- {
-    stage ('Build image')
+{
+  environment
+  {
+    registry = "siddhantkhobre/demoimage"
+    registryCredential = 'dockerid'
+    dockerImage = ''
+  }
+agent any
+
+stages
+{
+  stage('Build image')
+  {
+    steps
     {
-       steps
-       { 
-         script
-         {    
-             dockerImage= docker.build registry  :"$BUILD_NUMBER"
-         }
+      script
+      {
+          dockerImage = docker.build registry + ":$BUILD_NUMBER"
       }
-   }
-   
-   stage ('Deploy the image')
-   { 
-        steps
-       { 
-         script
-         {    
-            docker.withRegistry ('', registryCredential)
-            {
-                dockerImage.push()
-            }
-          }
-       }   
     }
- } 
+  }
+  stage('Deploy the image')
+  {
+    steps
+    {
+      script
+      {
+          docker.withRegistry( '',registryCredential )
+          {
+            dockerImage.push()
+          }
+      }
+    }
+  }
+}
 }
